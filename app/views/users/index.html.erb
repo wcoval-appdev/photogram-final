@@ -23,7 +23,15 @@
           Yes
           <% end %>  
           </td>
-          <td>Placeholder for Follow button</td>
+          <td><% if @current_user == nil %>
+          
+          <% else %>
+          <form action="follow">
+            <label for="follow_request"></label>
+            <button>Follow</button>
+          </form>
+          <% end %>
+          </td>
           <td>
             <a href="/users/<%= a_thing.username %>">Show Details</a>
           </td>
