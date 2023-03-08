@@ -14,7 +14,15 @@ class PhotosController < ApplicationController
 
     @the_photo = matching_photos.at(0)
 
-    render({ :template => "photos/show.html.erb" })
+    matching_comments = Comment.all
+
+    @list_of_comments = matching_comments.order({ :created_at => :asc })
+
+    if @current_user != nil
+      render({ :template => "photos/show.html.erb" })
+    else
+      redirect_to("/user_sign_in", { :notice => "You have to sign in first" })
+    end
   end
 
   def create
@@ -25,7 +33,7 @@ class PhotosController < ApplicationController
 
     if the_photo.valid?
       the_photo.save
-      redirect_to("/photos", { :notice => "Photo created successfully." })
+      redirect_to("/photos", { :notice => "Photo created successfully" })
     else
       redirect_to("/photos", { :alert => the_photo.errors.full_messages.to_sentence })
     end

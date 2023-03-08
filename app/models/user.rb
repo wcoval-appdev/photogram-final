@@ -22,5 +22,6 @@ class User < ApplicationRecord
   has_many(:likes, { :class_name => "Like", :foreign_key => "fan_id", :dependent => :destroy })
   has_many(:followrequests, { :class_name => "Followrequest", :foreign_key => "recipient_id", :dependent => :destroy })
   has_many(:sentrequests, { :class_name => "Followrequest", :foreign_key => "sender_id", :dependent => :destroy })
+  has_many(:posts, { :through => :comments, :source => :photo })
 
 end
