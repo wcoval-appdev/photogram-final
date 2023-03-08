@@ -1,13 +1,14 @@
 <div>
   <div>
     <h1>
-      List of all photos
+      List of photos
     </h1>
   </div>
 </div>
 
 <hr>
-
+<% if @current_user == nil%>
+<% else %>
 <div>
   <div>
     <h2>
@@ -24,27 +25,11 @@
       </div>
 
       <div>
-        <label for="comments_count_box">
-          Comments count
-        </label>
-
-        <input type="text" id="comments_count_box" name="query_comments_count">
-      </div>
-
-      <div>
         <label for="image_box">
           Image
         </label>
 
         <input type="text" id="image_box" name="query_image">
-      </div>
-
-      <div>
-        <label for="likes_count_box">
-          Likes count
-        </label>
-
-        <input type="text" id="likes_count_box" name="query_likes_count">
       </div>
 
       <div>
@@ -61,7 +46,7 @@
     </form>
   </div>
 </div>
-
+<% end %>
 <hr>
 <div>
   <div>
@@ -102,9 +87,12 @@
         <th>
         </th>
       </tr>
-
+      
       <% @list_of_photos.each do |a_photo| %>
       <tr>
+      <% if a_photo.owner.private == true %>
+
+      <% else %>
         <td>
           <%= a_photo.id %>
         </td>
@@ -142,6 +130,7 @@
           </a>
         </td>
       </tr>
+      <% end %>
       <% end %>
     </table>
   </div>
