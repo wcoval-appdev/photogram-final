@@ -14,7 +14,9 @@ def show
 
   @the_user = User.where({ :username => the_username}).at(0)
 
-  #@count_of_followers = @the_user.followrequests
+  user_photos = @the_user.photos
+
+  @list_of_photos = user_photos.order({ :created_at => :desc })
 
   render({:template => "users/show.html.erb"})
 end
